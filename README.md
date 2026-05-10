@@ -3,11 +3,11 @@
 Build and run
 ```
 $ make
-$ qemu-system-x86_64 -hda boot.bin    # Boot it in the emulator
+$ qemu-system-x86_64 -hda /bin/boot.bin    # Boot it in the emulator
 ```
 
 Debug
 ```
 $ gdb
-(gdb) target remote | qemu-system-x86_64 -hda ./boot.bin -S -gdb stdio
+(gdb) target remote | qemu-system-x86_64 -hda ./bin/boot.bin -S -gdb stdio
 ```
