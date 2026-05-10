@@ -1,12 +1,13 @@
 ### PeachOS
 
+Build and run
 ```
-$ nasm -f bin boot.asm -o boot.bin    # Assemble to raw binary 
+$ make
 $ qemu-system-x86_64 -hda boot.bin    # Boot it in the emulator
 ```
 
 Debug
 ```
-gdb
+$ gdb
 (gdb) target remote | qemu-system-x86_64 -hda ./boot.bin -S -gdb stdio
 ```
