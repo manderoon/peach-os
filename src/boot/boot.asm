@@ -31,7 +31,8 @@ step2:
     mov eax, cr0
     or eax, 0x1
     mov cr0, eax            ; reset register
-    jmp CODE_SEG:load32     ; CODE_SEG = 0x8
+    ;jmp CODE_SEG:load32     ; CODE_SEG = 0x8
+    jmp $
 
 ; GDT
 gdt_start:
@@ -62,22 +63,6 @@ gdt_descriptor:
     dw gdt_end - gdt_start-1    ; size of descriptor
     dd gdt_start                ; offset
 
-[BITS 32]
-load32:
-    mov ax, DATA_SEG
-    mov ds, ax
-    mov es, ax
-    mov fs, ax
-    mov gs, ax
-    mov ss, ax
-    mov ebp, 0x00200000
-    mov esp, ebp
-
-    ; enable the A20 line
-    in al, 0x92
-    or al, 2
-    out 0x92, al
-    jmp $
 
 times 510-($-$$) db 0   ; times = repeat this thing N times
                         ; $-$$ = how many bytes we have so far 
