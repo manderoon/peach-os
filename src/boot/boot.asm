@@ -35,6 +35,7 @@ step2:
 
 ; GDT
 gdt_start:
+
 gdt_null:
     dd 0x0      ; 64 bits of null
     dd 0x0
@@ -45,15 +46,16 @@ gdt_code:           ; CS should point to this
     dw 0            ; base first 0-15 bits
     db 0            ; base 16-23 bits
     db 0x9a         ; access byte
-    db 1100111b     ; high 4 bit flags and low 4 bit flags
+    db 11001111b    ; high 4 bit flags and low 4 bit flags
     db 0            ; base 24-31 bits
+
 ;offset 0x10
 gdt_data:           ; DS, SS, ES, FS, GS
     dw 0xffff       ; segment limit first 0-15 bits
     dw 0            ; base first 0-15 bits
     db 0            ; base 16-23 bits
     db 0x92         ; access byte
-    db 1100111b     ; high 4 bit flags and low 4 bit flags
+    db 11001111b    ; high 4 bit flags and low 4 bit flags
     db 0            ; base 24-31 bits
 
 gdt_end:
@@ -111,7 +113,6 @@ ata_lba_read:
     mov dx, 0x1f7
     mov al, 0x20
     out dx, al
-
     ; read all sectors into memory
 
 .next_sector:
