@@ -1,4 +1,7 @@
 [BITS 32]
+
+section .text               ; needs to be the first bit of code we run
+
 global _start
 
 CODE_SEG equ 0x08
@@ -19,3 +22,5 @@ _start:
     or al, 2
     out 0x92, al
     jmp $
+
+times 512-($-$$) db 0   ; solves alignment issues by forcing it to be 512 bytes long
