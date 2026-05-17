@@ -71,7 +71,7 @@ load32:
     mov ecx, 100                ; total number of sectors we want to laod - 100 sectors
     mov edi, 0x100000           ; address we want to load into - 1MB
     call ata_lba_read           ; label to talk with the driver and load the sector into memory
-
+    jmp CODE_SEG:0x100000       ; jump to kernel address
 
 ; LBA = sector offset from the very beginning of the disk
 ; dummy driver to load the kernel
@@ -86,7 +86,7 @@ ata_lba_read:
 
     ; send total sectors to the hard disk controller
     mov eax, ecx
-    mov dx, 0x1F6
+    mov dx, 0x1F2
     out dx, al
     ; finished sending total sectors to read
 
